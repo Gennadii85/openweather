@@ -33,13 +33,6 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           title: const Text('Weather'),
           centerTitle: true,
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios,
-            ),
-            color: Colors.black,
-            onPressed: () => Navigator.pop(context),
-          ),
         ),
         body: SingleChildScrollView(
           child: BlocBuilder<HomePageCubit, HomePageState>(
@@ -48,21 +41,17 @@ class _HomePageState extends State<HomePage> {
                 final String iconnov = state.weather.weather[0].icon;
                 return Column(
                   children: [
-                    cityName(state),
-                    Card(
-                      child: Container(
-                        height: 150,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            width: 1.5,
-                            color: const Color.fromARGB(255, 233, 229, 229),
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Image.network(
-                          'https://openweathermap.org/img/wn/$iconnov@2x.png',
-                        ),
-                      ),
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: _cityName(state),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: _picture(iconnov),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: _description(state),
                     ),
                     TextButton(
                       onPressed: () => Navigator.of(context).push(
@@ -90,17 +79,62 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Row cityName(HomePageLoad state) {
+  Column _description(state) {
+    final String temp = state.weather.main.temp.toString();
+    final String speed = state.weather.wind.speed.toString();
+    final String pressure = state.weather.main.pressure.toString();
+    final String humidity = state.weather.main.humidity.toString();
+
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(8, 15, 8, 8),
+          child: Text('Temperature $temp Celsius'),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text('Speed $speed m/s'),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text('Pressure $pressure hPa'),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text('Humidity $humidity %'),
+        ),
+      ],
+    );
+  }
+
+  Card _picture(String iconnov) {
+    return Card(
+      color: Colors.transparent,
+      shadowColor: Colors.transparent,
+      surfaceTintColor: Colors.transparent,
+      child: Container(
+        height: 150,
+        decoration: BoxDecoration(
+          border: Border.all(
+            width: 1.5,
+            color: const Color.fromARGB(255, 233, 229, 229),
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Image.network(
+          'https://openweathermap.org/img/wn/$iconnov@2x.png',
+        ),
+      ),
+    );
+  }
+
+  Row _cityName(HomePageLoad state) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           state.weather.name,
-          style: const TextStyle(
-            fontSize: 46,
-            fontWeight: FontWeight.w400,
-            color: Colors.amberAccent,
-          ),
+          style: Variables().cityName,
         ),
       ],
     );

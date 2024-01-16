@@ -1,31 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:openweather/data/repositories/weather_repository.dart';
-import 'package:openweather/domain/use_cases/weather_use_case.dart';
-import 'package:openweather/presentation/cubits/details_page/details_page_cubit.dart';
-import 'package:openweather/presentation/cubits/home_page/home_page_cubit.dart';
+import 'package:openweather/core/variables.dart';
+import 'package:openweather/presentation/pages/details_page.dart';
 import 'package:openweather/presentation/pages/home_page.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
-  final HomePageCubit homePageCubit = HomePageCubit(
-    WeatherUseCase(WeatherRepository()),
-  );
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => homePageCubit,
+          create: (context) => VariablesCubits().homePageCubit,
           child: const HomePage(),
         ),
         BlocProvider(
-          create: (context) => DetailsPageCubit(),
+          create: (context) => VariablesCubits().detailsPageCubit,
+          child: const DetailsPage(),
         ),
       ],
       child: const HomePage(),

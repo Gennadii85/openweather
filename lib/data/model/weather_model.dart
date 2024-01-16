@@ -44,24 +44,6 @@ class WeatherModel {
     name = json['name'];
     cod = json['cod'];
   }
-
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['coord'] = coord.toJson();
-    data['weather'] = weather.map((e) => e.toJson()).toList();
-    data['base'] = base;
-    data['main'] = main.toJson();
-    data['visibility'] = visibility;
-    data['wind'] = wind.toJson();
-    data['clouds'] = clouds.toJson();
-    data['dt'] = dt;
-    data['sys'] = sys.toJson();
-    data['timezone'] = timezone;
-    data['id'] = id;
-    data['name'] = name;
-    data['cod'] = cod;
-    return data;
-  }
 }
 
 class Coord {
@@ -75,13 +57,6 @@ class Coord {
   Coord.fromJson(Map<String, dynamic> json) {
     lon = json['lon'];
     lat = json['lat'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['lon'] = lon;
-    data['lat'] = lat;
-    return data;
   }
 }
 
@@ -102,15 +77,6 @@ class Weather {
     main = json['main'];
     description = json['description'];
     icon = json['icon'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['id'] = id;
-    data['main'] = main;
-    data['description'] = description;
-    data['icon'] = icon;
-    return data;
   }
 }
 
@@ -144,19 +110,6 @@ class Main {
     seaLevel = json['sea_level'];
     grndLevel = json['grnd_level'];
   }
-
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['temp'] = temp;
-    data['feels_like'] = feelsLike;
-    data['temp_min'] = tempMin;
-    data['temp_max'] = tempMax;
-    data['pressure'] = pressure;
-    data['humidity'] = humidity;
-    data['sea_level'] = seaLevel;
-    data['grnd_level'] = grndLevel;
-    return data;
-  }
 }
 
 class Wind {
@@ -174,14 +127,6 @@ class Wind {
     deg = json['deg'];
     gust = json['gust'];
   }
-
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['speed'] = speed;
-    data['deg'] = deg;
-    data['gust'] = gust;
-    return data;
-  }
 }
 
 class Clouds {
@@ -192,12 +137,6 @@ class Clouds {
 
   Clouds.fromJson(Map<String, dynamic> json) {
     all = json['all'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['all'] = all;
-    return data;
   }
 }
 
@@ -215,13 +154,5 @@ class Sys {
     country = json['country'];
     sunrise = json['sunrise'];
     sunset = json['sunset'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['country'] = country;
-    data['sunrise'] = sunrise;
-    data['sunset'] = sunset;
-    return data;
   }
 }

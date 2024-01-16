@@ -1,6 +1,18 @@
 part of 'details_page_cubit.dart';
 
-@immutable
-sealed class DetailsPageState {}
+class DetailsPageState {}
 
-final class DetailsPageInitial extends DetailsPageState {}
+final class DetailsInitial extends DetailsPageState {}
+
+class DetailsLoad extends DetailsPageState {
+  final WeatherDetailsModel weather;
+  DetailsLoad({
+    required this.weather,
+  });
+}
+
+class DetailsError extends DetailsPageState {
+  final String error;
+
+  DetailsError(this.error);
+}
